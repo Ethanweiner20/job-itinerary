@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="icon" href="pitch-fork.png"></link>
+    <title>Job Itinerary</title>
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-dark bg-success sticky-top">
+        <a class="navbar-brand">jobitinerary.com</a>
+        <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="account-status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Not Signed In</button>
+            <div class="dropdown-menu" aria-labelledby="account-status">
+                <a href="#" class="dropdown-item" id="sign-out-button">Sign out</a>
+            </div>
+        </div>
+    </nav>
+
+    <!--Jumbotron-->
+    <div class="jumbotron my-5 mx-auto d-none" style="max-width: 1000px;">
+        <h1 class="display-5 text-success">Track your tools and tasks!</h1>
+        <p class="lead">
+            A simple tool to track a day at work. Record tools, tasks, hours, and more on the go!
+            <ul>
+                <li>Plan at home</li>
+                <li>Track your progress at work on mobile</li>
+                <li>Share an account between boss and workers for easy communication</li>
+            </ul>
+        </p>
+
+        <div class="row">
+            <div class="col-sm-11 m-auto">
+                <div class="embed-responsive embed-responsive-16by9 mb-3">
+                    <iframe width="1732" height="712" src="https://www.youtube.com/embed/oFtivptlNXQ" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <p class="text-info">Sign up or sign in to start.</p>
+        <hr>
+        <button class="btn btn-info" id="sign-in">Sign In</button>
+        <button class="btn btn-secondary" id="sign-up">Sign Up</button>
+
+        <!--Sign In Form-->
+        <form id="sign-in-form" class="my-3 d-none">
+            <div class="form-group">
+                <label class="text-info" for="email">Email address</label>
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
+                    placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label class="text-info" for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password">
+                <p class="text-danger d-none">Invalid email/password</p>
+            </div>
+            <button type="submit" class="btn btn-white text-info border-info shadow">Sign In</button>
+        </form>
+
+        <!--Sign Up Form: Add Border & Background-Color Feedback-->
+        <form id="sign-up-form" class="my-3 d-none">
+            <div class="form-group">
+                <label class="text-secondary" for="email">Email address</label>
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
+                    placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label class="text-secondary" for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password">
+                <p class="text-danger d-none">Password must be at least 8 characters & contain uppercase letter, a number, a symbol.</p>
+            </div>
+            <button type="submit" class="btn text-secondary btn-white border-secondary shadow">Sign Up</button>
+        </form>
+
+    </div>
+    
+    <!--Tabs-->
+    <div id="main-container" class="container mt-4 d-none">
+        <div class="row m-auto" style="max-width: 1000px;">
+            <div class="col-12 m-auto px-sm-5">
+                <ul class="nav nav-tabs nav-fill nav-justify" id="tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="new-day-tab" data-toggle="tab" href="#new-day" role="tab" aria-controls="new-day"
+                            aria-selected="true">Recent Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="archives-tab" data-toggle="tab" href="#archives" role="tab" aria-controls="archives"
+                            aria-selected="false">Archives</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+
+                    <!--New Day Tab-->
+                    <div class="tab-pane fade show mb-3 active" id="new-day" role="tabpanel" aria-labelledby="new-day-tab">
+                        <h2 class="text-dark text-center my-4 font-weight-bold main-font">Recent Jobs </h2>
+                    </div>
+
+                    <div class="tab-pane fade show" id="archives" role="tabpanel" aria-labelledby="archives-tab">
+                        
+                        <form class="mt-4" id="search-form">
+                            <h2 class="text-dark text-center my-4 font-weight-bold main-font">Search Through Past Days</h2>
+                            <div class="input-group">
+                                <input id="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                <div class="input-group-append">
+                                    <select name="search-filter" id="search-filter" class="custom-select mr-1">
+                                        <option selected disabled>Search By</option>
+                                        <option value="All Days">All Days</option>
+                                        <option value="Customer">Customer</option>
+                                        <option value="Date">Date</option>
+                                        <option value="Location">Location</option>
+                                        <option value="Workers">Workers</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-outline-success my-2 btn-block" type="submit">Search</button>
+                            </div>
+                        </form>
+                        <div class="list-group d-none"></div>
+                        </form>
+                    </div>
+
+                    <form class="mt-4" id="day-form">
+                        <!--Main Inputs-->
+                        <div class="form-row">
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="customer" class="font-weight-bold">Customer*</label>
+                                <input type="text" id="customer" class="form-control" placeholder="Customer"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="workers" class="font-weight-bold">Worker(s)</label>
+                                <input type="text" id="workers" class="form-control" placeholder="Names of workers"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="date" class="font-weight-bold">Date*</label>
+                                <input type="date" class="form-control" id="date"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="job-location" class="font-weight-bold">Job Location</label>
+                                <input type="text" class="form-control" id="location" placeholder="Location"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="hours" class="font-weight-bold">Start Time</label>
+                                <input type="text" class="form-control" id="time" placeholder="Start Time"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="hours" class="font-weight-bold">Hours*</label>
+                                <input type="text" class="form-control" id="hours" placeholder="Total Hours & On Site Hours"></input>
+                            </div>
+                        </div>
+                    
+                        <!--Tools Input-->
+                        <div class="form-group tools-form">
+                            <label for="tools" class="font-weight-bold">Tools</label>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-sm tools-button d-inline text-white">+ New Tool</button>
+                            <p class="text-muted font-italic d-inline ml-2">or press enter</p>
+                        </div>
+                    
+                        <!--Tasks Input-->
+                        <div class="form-group tasks-form">
+                            <label for="tasks" class="font-weight-bold">Tasks</label>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-sm tasks-button d-inline text-white">+ New Task</button>
+                            <p class="text-muted font-italic d-inline ml-2">or press enter</p>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="additional-notes" class="font-weight-bold">Additional Notes</label>
+                            <textarea class="form-control" rows=1 name="additionalNotes" placeholder="Notes"></textarea>
+                        </div>
+                        <div class="form-group images-videos-form">
+                            <label for="images-videos" class="font-weight-bold">Images & Videos</label>
+                            <div class="image-video-input-group input-group">
+                                <button type="button" class="close mr-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <input type="file" name="input-file" id="input-file" accept="image/*,video/*">
+                            </div>
+                            <div class="image-preview d-block ml-3 mt-1" id="image-preview">
+                                <img src="" alt="No Image Selected" class="img-thumbnail image-preview__image">
+                            </div>
+                        </div>
+
+                    
+                    </form>
+                    <button id="submit" class="mt-1 btn btn-danger btn-block">Submit Day <span class="font-italic">(Once Finished)</span></span></button>
+                    <button id="update" class="mb-2 d-none btn btn-success btn-block">Update</button>
+                    <button id="reset" class="mb-2 btn btn-warning btn-block">Reset</button>
+
+
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="loading-spinner.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+    
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCmlTW8lDP0auyUys8K7GAfTmt7YbiXh6A",
+            authDomain: "job-tracker-383cd.firebaseapp.com",
+            databaseURL: "https://job-tracker-383cd.firebaseio.com",
+            projectId: "job-tracker-383cd",
+            storageBucket: "job-tracker-383cd.appspot.com",
+            messagingSenderId: "999890853309",
+            appId: "1:999890853309:web:6846b9651d6971513746d4",
+            measurementId: "G-1XTQM9NDRL"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+    </script>
+
+    <!-- Optional JavaScript -->
+    <script src="utilities.js"></script>
+    <script src="auth.js"></script>
+    <script src="forms.js"></script>
+    <script src="app.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

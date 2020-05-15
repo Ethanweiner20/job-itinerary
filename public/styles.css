@@ -1,0 +1,121 @@
+.main-font {
+  font-family: "Righteous", cursive;
+}
+
+nav {
+  font-family: "Righteous", cursive;
+}
+
+nav .border {
+  border-width: 5px !important;
+}
+
+.jumbotron h1 {
+  font-family: "Righteous", cursive;
+}
+
+button,
+kaomos-button {
+  font-family: "Righteous", cursive;
+}
+
+#tab {
+  font-family: "Righteous", cursive;
+}
+
+.form-check {
+  font-size: 12px;
+}
+
+.tools-form {
+  color: #926b23;
+}
+
+.tools-form input,
+.tools-form select {
+  border: 1px solid #926b23;
+}
+
+.tools-form input:focus,
+.tools-form select:focus {
+  border: 2px solid #866220;
+}
+
+select {
+  border-radius: 0px 5px 5px 0px !important;
+}
+
+.tools-button {
+  background-color: #926b23;
+}
+
+.tools-button:hover {
+  background-color: #7d5c1e;
+}
+
+textarea {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.tasks-form {
+  color: #006b5d;
+}
+
+.tasks-form input,
+.tasks-form select,
+.tasks-form textarea {
+  border: 1px solid #006b5d;
+}
+
+.tasks-form input:focus,
+.tasks-form select:focus,
+.tasks-form textarea:focus {
+  border: 2px solid #005c50;
+}
+
+.tasks-form input {
+  margin-bottom: -1px !important;
+}
+
+.tasks-button {
+  background-color: #006b5d;
+}
+
+.tasks-button:hover {
+  background-color: #005247;
+}
+
+@media (max-width: 576px) {
+  select {
+    display: none !important;
+  }
+}
+
+#search-filter {
+  display: block !important;
+}
+
+.input-container input {
+  border: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: 0;
+  padding: .75rem;
+  position: relative;
+  width: 100%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+/*# sourceMappingURL=styles.css.map */
