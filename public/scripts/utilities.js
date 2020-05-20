@@ -11,12 +11,10 @@ const submitButton = document.querySelector('#submit');
 const list = document.querySelector('.list-group');
 const updateButton = document.querySelector('#update');
 const resetButton = document.querySelector('#reset');
-const form = document.querySelector('#day-form');
-const newToolButton = document.querySelector('.tools-button');
-const newTaskButton = document.querySelector('.tasks-button');
-const toolsForm = document.querySelector('.tools-form');
-const tasksForm = document.querySelector('.tasks-form');
+const jobForm = document.querySelector('#job-form');
 const dateInput = document.querySelector('#date');
+const workersSelect = document.querySelector('.workers-select');
+const newWorkerForm = document.querySelector('.new-worker-form');
 
 Spinner();
 Spinner.hide();

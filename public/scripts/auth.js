@@ -2,28 +2,27 @@ let user;
 
 // Make Changes Based on User Status
 
-const renderUserUI = () => {
+const renderUserUI = async () => {
 	accountStatus.innerText = user.email;
 	accountStatus.classList.add('dropdown-toggle');
 	jumbotron.classList.add('d-none');
 	mainContainer.classList.remove('d-none');
 
 	// ADD LIST FUNCTIONALITY TO ITS OWN CLASS
-	db.collection('users').doc(user.uid).collection('days').onSnapshot((snapshot) => {
-		let finished = false;
-		snapshot.docChanges().forEach((change) => {
-			console.log(change.type);
-			if (!finished && (change.type === 'added' || change.type === 'removed')) {
-				const list = new List();
-				list.update('all days');
-				finished = true;
-			}
-		});
-	});
+	// db.collection('users').doc(user.uid).collection('days').onSnapshot((snapshot) => {
+	// 	let finished = false;
+	// 	snapshot.docChanges().forEach((change) => {
+	// 		console.log(change.type);
+	// 		if (!finished && (change.type === 'added' || change.type === 'removed')) {
+	// 			const list = new List();
+	// 			list.update('all days');
+	// 			finished = true;
+	// 		}
+	// 	});
+	// });
 
-	showDay().then(() => {
-		Spinner.hide();
-	});
+	const workersSelect = new WorkersSelect();
+	workersSelect.onSnapshot();
 };
 
 const renderNonUserUI = () => {

@@ -1,61 +1,50 @@
-// MOVE TO DAYVIEW CLASS
-class Day {
-	constructor(form) {
-		const { customer, workers, location, time, hours, additionalNotes } = form;
-		this.customer = customer.value.trim();
-		this.workers = workers.value.trim();
-		this.date = new Date(getDateInput());
-		this.location = location.value.trim();
-		this.startTime = time.value.trim();
-		this.hours = hours.value.trim();
-		this.tools = getItemsFromList('tool');
-		this.tasks = getItemsFromList('task');
-		this.additionalNotes = additionalNotes.value.trim();
-	}
-	toFirestore() {
-		return {
-			customer: this.customer,
-			workers: this.workers,
-			date: this.date,
-			location: this.location,
-			startTime: this.startTime,
-			hours: this.hours,
-			tools: this.tools,
-			tasks: this.tasks,
-			additionalNotes: this.additionalNotes
-		};
-	}
-	async submit(dataId) {
-		const docRef = db.collection('users').doc(user.uid);
-		Spinner.show();
-		if (dataId) {
-			await docRef.collection('days').doc(dataId).set(this.toFirestore());
-		} else {
-			await docRef.collection('days').add(this.toFirestore());
-			await docRef.collection('current day').doc('current').delete();
-		}
-		Spinner.hide();
-		return this;
-	}
-	async setAsCurrent() {
-		const docRef = db.collection('users').doc(user.uid);
-		await docRef.collection('current day').doc('current').set(this.toFirestore());
-	}
-}
+// // MOVE TO DAYVIEW CLASS
+// class Day {
+// 	constructor(form) {
+// 		const { customer, workers, location, time, hours, additionalNotes } = form;
+// 		this.customer = customer.value.trim();
+// 		this.workers = workers.value.trim();
+// 		this.date = new Date(getDateInput());
+// 		this.location = location.value.trim();
+// 		this.startTime = time.value.trim();
+// 		this.hours = hours.value.trim();
+// 		this.tools = getItemsFromList('tool');
+// 		this.tasks = getItemsFromList('task');
+// 		this.additionalNotes = additionalNotes.value.trim();
+// 	}
+// 	toFirestore() {
+// 		return {
+// 			customer: this.customer,
+// 			workers: this.workers,
+// 			date: this.date,
+// 			location: this.location,
+// 			startTime: this.startTime,
+// 			hours: this.hours,
+// 			tools: this.tools,
+// 			tasks: this.tasks,
+// 			additionalNotes: this.additionalNotes
+// 		};
+// 	}
+// 	async submit(dataId) {
+// 		const docRef = db.collection('users').doc(user.uid);
+// 		Spinner.show();
+// 		if (dataId) {
+// 			await docRef.collection('days').doc(dataId).set(this.toFirestore());
+// 		} else {
+// 			await docRef.collection('days').add(this.toFirestore());
+// 			await docRef.collection('current day').doc('current').delete();
+// 		}
+// 		Spinner.hide();
+// 		return this;
+// 	}
+// 	async setAsCurrent() {
+// 		const docRef = db.collection('users').doc(user.uid);
+// 		await docRef.collection('current day').doc('current').set(this.toFirestore());
+// 	}
+// }
 
 // MOVE TO APP.JS (create event listener inside DAYVIEW class)
-submitButton.addEventListener('click', (e) => {
-	e.preventDefault();
-	const day = new Day(form);
-	day
-		.submit()
-		.then(() => {
-			resetForm();
-		})
-		.catch((err) => {
-			console.log(err.message);
-		});
-});
+// Don't actually use a submit button
 
 // MOVE TO APP.JS (create event listener inside DAYVIEW class)
 updateButton.addEventListener('click', (e) => {
@@ -66,13 +55,14 @@ updateButton.addEventListener('click', (e) => {
 
 // Save Form on Change
 // MOVE TO DAYVIEW.JS
-const refreshCurrentDay = () => {
-	if (document.querySelector('#new-day-tab').classList.contains('active')) {
-		const day = new Day(form);
-		day.setAsCurrent();
-	}
-};
+// const refreshCurrentDay = () => {
+// 	if (document.querySelector('#new-day-tab').classList.contains('active')) {
+// 		const day = new Day(form);
+// 		day.setAsCurrent();
+// 	}
+// };
 
+// Add to app.js
 form.addEventListener('keyup', (e) => {
 	refreshCurrentDay();
 });
@@ -146,42 +136,42 @@ searchForm.addEventListener('submit', (e) => {
 });
 
 // MOVE TO DAYVIEW.JS
-async function showDay(dataId) {
-	Spinner.show();
-	const docRef = await db.collection('users').doc(user.uid);
-	let doc;
-	if (dataId) {
-		doc = await docRef.collection('days').doc(dataId).get();
-		updateButton.classList.remove('d-none');
-		resetButton.classList.remove('d-none');
-	} else {
-		doc = await docRef.collection('current day').doc('current').get();
-	}
-	const data = doc.data();
-	list.classList.add('d-none');
-	form.classList.remove('d-none');
-	if (data) {
-		const { customer, workers, date, location, startTime, hours, additionalNotes } = data;
+// async function showDay(dataId) {
+// 	Spinner.show();
+// 	const docRef = await db.collection('users').doc(user.uid);
+// 	let doc;
+// 	if (dataId) {
+// 		doc = await docRef.collection('days').doc(dataId).get();
+// 		updateButton.classList.remove('d-none');
+// 		resetButton.classList.remove('d-none');
+// 	} else {
+// 		doc = await docRef.collection('current day').doc('current').get();
+// 	}
+// 	const data = doc.data();
+// 	list.classList.add('d-none');
+// 	form.classList.remove('d-none');
+// 	if (data) {
+// 		const { customer, workers, date, location, startTime, hours, additionalNotes } = data;
 
-		form.setAttribute('data-id', dataId);
-		form.customer.value = customer;
-		form.workers.value = workers;
-		form.date.valueAsDate = date.toDate();
-		form.location.value = location;
-		form.time.value = startTime;
-		form.hours.value = hours;
-		form.additionalNotes.value = additionalNotes;
+// 		form.setAttribute('data-id', dataId);
+// 		form.customer.value = customer;
+// 		form.workers.value = workers;
+// 		form.date.valueAsDate = date.toDate();
+// 		form.location.value = location;
+// 		form.time.value = startTime;
+// 		form.hours.value = hours;
+// 		form.additionalNotes.value = additionalNotes;
 
-		toolsForm.innerHTML = '<label for="tools" class="font-weight-bold">Tools</label>';
-		data.tools.forEach((tool, index) => {
-			addTool(index, tool.name, tool.outToJob, tool.backToShop);
-		});
-		tasksForm.innerHTML = '<label for="tasks" class="font-weight-bold">Tasks</label>';
-		data.tasks.forEach((task) => {
-			addTask(task.name, task.completed, task.notes);
-		});
-	}
-}
+// 		toolsForm.innerHTML = '<label for="tools" class="font-weight-bold">Tools</label>';
+// 		data.tools.forEach((tool, index) => {
+// 			addTool(index, tool.name, tool.outToJob, tool.backToShop);
+// 		});
+// 		tasksForm.innerHTML = '<label for="tasks" class="font-weight-bold">Tasks</label>';
+// 		data.tasks.forEach((task) => {
+// 			addTask(task.name, task.completed, task.notes);
+// 		});
+// 	}
+// }
 
 // MOVE TO LISTVIEW CLASS
 const deleteListItem = async (dataId) => {

@@ -1,5 +1,42 @@
-// Add funtionality for multiple workers by creating multiple DayViews
-// Change "Current Day tab" to "Most recent job" tab
-// Turn content into carousel to view 5 most recent days w/ last slide linking button to archives
-// Store rest of days in archives tab
-// Add select to select current worker
+dateInput.valueAsDate = new Date();
+let dayView;
+
+document.querySelector('#new-day-tab').addEventListener('click', () => {
+	document.querySelector('#reset').classList.remove('d-none');
+	document.querySelector('.list-group').classList.add('d-none');
+	const dayView = new DayView();
+	dayView.setDayDoc().show();
+});
+
+document.querySelector('#archives-tab').addEventListener('click', () => {
+	jobForm.classList.add('d-none');
+	document.querySelector('#reset').classList.add('d-none');
+	document.querySelector('.list-group').classList.remove('d-none');
+});
+
+workersSelect.addEventListener('change', async (e) => {
+	if (e.target.classList.contains('workers-select')) {
+		if (dayView) {
+			dayView.resetForm();
+			dayView.updateWorker(e.target.value);
+		} else {
+			dayView = new DayView(jobForm, e.target.value, {});
+		}
+		await dayView.setDayDoc();
+		await dayView.show();
+	}
+});
+
+newWorkerForm.addEventListener('submit', async (e) => {
+	e.preventDefault();
+	const name = newWorkerForm.name.value;
+	await db.collection('users').doc(user.uid).collection('workers').doc(name).set({
+		name: name,
+		created_at: new Date()
+	});
+	dayView = new DayView(jobForm, name, { newJob: true });
+	await dayView.setDayDoc();
+	await dayView.show();
+	newWorkerForm.name.value = '';
+	workersSelect.value = name;
+});
