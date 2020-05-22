@@ -20,7 +20,7 @@ const renderUserUI = async () => {
 	// 		}
 	// 	});
 	// });
-
+	jobRoom = new Jobroom('');
 	const workersSelect = new WorkersSelect();
 	workersSelect.onSnapshot();
 };

@@ -1,57 +1,6 @@
-class DayView {
-	constructor(form, worker, options) {
+class JobUI {
+	constructor(form) {
 		this.form = form;
-		this.worker = worker;
-		this.dataId = options.dataId;
-		this.newJob = options.newJob;
-		this.collectionRef = db.collection('users').doc(user.uid).collection('workers').doc(worker).collection('jobs');
-
-		this.form.classList.remove('d-none');
-
-		this.form.addEventListener('keyup', () => {
-			this.save();
-			console.log('keyup');
-		});
-
-		this.form.addEventListener('click', () => {
-			this.save();
-			console.log('click');
-		});
-		console.log(this.form);
-
-		this.toolOptions = [
-			'Spring Rake',
-			'Plastic Rake',
-			'Spade',
-			'Flat Shovel',
-			'Iron Rake',
-			'Edger',
-			'Snow Shovel',
-			'Small Rake',
-			'Wheelbarrow',
-			'Pitchfork',
-			'Broom',
-			'Pickaxe',
-			'Tamper',
-			'Sledge Hammer',
-			'Tarp',
-			'Cone',
-			'Loppers',
-			'Snips',
-			'Snips',
-			'Scuffhoe',
-			'Bucket',
-			'Barrel',
-			'Hedgetrimmer',
-			'Leafblower',
-			'Dandelion Puller',
-			'Weeder',
-			'Hori-Hori Knife',
-			'Weedwacker',
-			'Lawnmower',
-			'Post Hole Diggers',
-			'Scythe'
-		];
 
 		// Adding New Tools & Tasks
 		this.form.querySelector('.tools-button').addEventListener('click', (e) => {
@@ -128,80 +77,12 @@ class DayView {
 			}
 		});
 	}
-
-	async updateWorker(worker) {
-		this.worker = worker;
-		this.collectionRef = await db
-			.collection('users')
-			.doc(user.uid)
-			.collection('workers')
-			.doc(worker)
-			.collection('jobs');
-	}
-
-	async setDayDoc() {
-		if (this.newJob) {
-			// Create new job document
-			console.log('new job created');
-			this.dayDoc = await this.collectionRef.doc();
-			await this.dayDoc.set({ created_at: new Date() });
-		} else if (this.dataId) {
-			// Get specified job
-			console.log('specified doc found');
-			this.dayDoc = await this.collectionRef.doc(this.dataId);
-		} else {
-			// Get most recent job
-			console.log('most recent job found');
-			this.dayDoc = await this.collectionRef.orderBy('created_at', 'desc').limit(1);
-			console.log(this.dayDoc);
-		}
-		return this;
-	}
-
-	async save() {
-		const { customer, workers, location, time, hours, additionalNotes } = this.form;
-		let doc;
-		if (this.dataId || this.newJob) {
-			doc = this.dayDoc;
-		} else {
-			const snapshot = await this.dayDoc.get();
-			doc = this.collectionRef.doc(snapshot.docs[0].id);
-		}
-		await doc.set({
-			customer: customer.value.trim(),
-			date: new Date(getDateInput()),
-			location: location.value.trim(),
-			startTime: time.value.trim(),
-			hours: hours.value.trim(),
-			tools: this.getItemsFromList('tool'),
-			tasks: this.getItemsFromList('task'),
-			additionalNotes: additionalNotes.value.trim(),
-			created_at: new Date()
-		});
-	}
-	async show() {
-		Spinner.show();
+	fillForm(data) {
 		this.form.classList.remove('d-none');
-		let data;
-		if (this.dataID || this.newJob) {
-			const doc = await this.dayDoc.get();
-			data = doc.data();
-		} else {
-			const snapshot = await this.dayDoc.get();
-			data = snapshot.docs[0].data();
-		}
-		if (
-			data.customer ||
-			data.workers ||
-			data.date ||
-			data.location ||
-			data.startTime ||
-			data.hours ||
-			data.additionalNotes
-		) {
-			const { customer, workers, date, location, startTime, hours, additionalNotes } = data;
+		this.resetForm();
+		if (data) {
+			const { customer, date, location, startTime, hours, additionalNotes } = data;
 			this.form.customer.value = customer;
-			this.form.workers.value = workers;
 			this.form.date.valueAsDate = date.toDate();
 			this.form.location.value = location;
 			this.form.time.value = startTime;
@@ -217,11 +98,20 @@ class DayView {
 			data.tasks.forEach((task) => {
 				this.addTask(task.name, task.completed, task.notes);
 			});
-		} else {
-			this.resetForm();
 		}
-
-		Spinner.hide();
+	}
+	getData() {
+		const { customer, location, time, hours, additionalNotes } = this.form;
+		return {
+			customer: customer.value.trim(),
+			date: new Date(getDateInput()),
+			location: location.value.trim(),
+			startTime: time.value.trim(),
+			hours: hours.value.trim(),
+			tools: this.getItemsFromList('tool'),
+			tasks: this.getItemsFromList('task'),
+			additionalNotes: additionalNotes.value.trim()
+		};
 	}
 	// Utilities
 	getItemsFromList(type) {
@@ -247,13 +137,47 @@ class DayView {
 	}
 	addTool(toolNumber, name, outToJob, backToShop) {
 		let selectInnerHTML = '';
-		this.toolOptions.forEach((tool) => {
+		const toolOptions = [
+			'Spring Rake',
+			'Plastic Rake',
+			'Spade',
+			'Flat Shovel',
+			'Iron Rake',
+			'Edger',
+			'Snow Shovel',
+			'Small Rake',
+			'Wheelbarrow',
+			'Pitchfork',
+			'Broom',
+			'Pickaxe',
+			'Tamper',
+			'Sledge Hammer',
+			'Tarp',
+			'Cone',
+			'Loppers',
+			'Snips',
+			'Snips',
+			'Scuffhoe',
+			'Bucket',
+			'Barrel',
+			'Hedgetrimmer',
+			'Leafblower',
+			'Dandelion Puller',
+			'Weeder',
+			'Hori-Hori Knife',
+			'Weedwacker',
+			'Lawnmower',
+			'Post Hole Digger'
+		];
+		toolOptions.forEach((tool) => {
 			selectInnerHTML += `<option value="${tool}">${tool}</option>`;
 		});
 
 		const newToolInput = document.createElement('div');
 		newToolInput.classList.add('tool-input-group', 'input-group', 'my-1');
-		newToolInput.innerHTML = `<button type="button" class="close mr-1" aria-label="Close">
+		newToolInput.innerHTML = `
+            
+            <button type="button" class="close mr-1" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<input type="text" class="form-control" placeholder="Enter a tool" value="${name}">
@@ -281,7 +205,8 @@ class DayView {
 						</div>
 					</div>
 				</div>
-			</div>`;
+            </div>
+        `;
 		newToolInput.querySelector('.out-to-job').checked = outToJob;
 		newToolInput.querySelector('.back-to-shop').checked = backToShop;
 		this.form.querySelector('.tools-form').appendChild(newToolInput);
@@ -290,17 +215,18 @@ class DayView {
 		const newTaskInput = document.createElement('div');
 		newTaskInput.innerHTML = `
 
-		<div class="task-input-group input-group mt-2">
-			<button type="button" class="close mr-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input class="completed" type="checkbox" aria-label="Checkbox for following text input">
+            <div class="task-input-group input-group mt-2">
+                <button type="button" class="close mr-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input class="completed" type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
                     </div>
-                </div>
-			<input value="${name}" type="text" id="task" class="form-control" placeholder="Task">
-        </div>
-        <textarea class="task-notes form-control ml-3 font-italic" rows=1 name="notes" placeholder="Notes">${notes}</textarea>
-	`;
+                <input value="${name}" type="text" id="task" class="form-control" placeholder="Task">
+            </div>
+            <textarea class="task-notes form-control ml-3 font-italic" rows=1 name="notes" placeholder="Notes">${notes}</textarea>
+
+	    `;
 		newTaskInput.querySelector('.completed').checked = completed;
 		this.form.querySelector('.tasks-form').appendChild(newTaskInput);
 	}
