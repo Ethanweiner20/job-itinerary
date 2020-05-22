@@ -108,11 +108,13 @@
                     <div class="tab-pane fade show mb-3 active" id="new-day" role="tabpanel" aria-labelledby="new-day-tab">
                         <h2 class="text-dark text-center my-4 font-weight-bold main-font">Recent Jobs </h2>
                         <div class="select-worker p-3 rounded border border-success shadow-lg">
+                            <h3 class="text-left">Select a Worker</h3>
                             <select class="custom-select my-2 workers-select" multiple>
-                                <option selected class="font-italic" size="5" value="" disabled>Select worker or group</option>
+                                <option selected class="font-italic" disabled>Select worker or group</option>
                             </select>
-                                <button type="button" data-toggle="modal" data-target="#new-worker-modal" class="new-worker btn d-inline text-white bg-success shadow" style="width: 300px;">+ New Worker/Group</button>
-                                <button type="button" class="ml-1 delete-worker btn btn-danger d-inline text-white shadow" style="width: 300px;">x Delete Selected Worker/Group</button>
+
+                                <button type="button" data-toggle="modal" data-target="#new-worker-modal" class="mr-1 my-1 new-worker btn d-inline text-white bg-success shadow" style="width: 300px;">+ New Worker/Group</button>
+                                <button type="button" data-toggle="modal" data-target="#delete-worker-modal" class="my-1 delete-worker btn btn-danger d-inline text-white shadow" style="width: 300px;">x Delete Selected Worker/Group</button>
                             </div>
                         </div>
                         <div class="modal fade" id="new-worker-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -134,11 +136,30 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Confirm</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
 
+                            </div>
+                        </div>
+                        <div class="modal fade" id="delete-worker-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form class="delete-worker-form">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Worker/Group: <span id="deleted-worker" class="font-italic text-danger"></span></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+                        
                             </div>
                         </div>
                     </div>
@@ -168,21 +189,19 @@
 
                 <form class="mt-4 mb-5 px-4 rounded shadow-lg border border-primary d-none" id="job-form">
                     <p class="mt-2 subtitle text-left font-italic text-info" style="font-size: 15px;">Changes save automatically</p>
+                    <h3 class="text-left">New Job Details for <strong class="current-worker" style="text-decoration: underline;"></strong></h3>
+                    <hr>
                     <!--Main Inputs-->
                     <div class="form-row">
-                        <div class="form-group col-12 col-sm-6 col-lg-4">
+                        <div class="form-group col-12 col-sm-6 col-lg-6">
                             <label for="customer" class="font-weight-bold">Customer*</label>
                             <input type="text" id="customer" class="form-control" placeholder="Customer"></input>
                         </div>
-                        <div class="form-group col-12 col-sm-6 col-lg-4">
-                            <label for="workers" class="font-weight-bold">Worker(s)</label>
-                            <input type="text" id="workers" class="form-control" placeholder="Names of workers"></input>
-                        </div>
-                        <div class="form-group col-12 col-sm-6 col-lg-4">
+                        <div class="form-group col-12 col-sm-6 col-lg-6">
                             <label for="date" class="font-weight-bold">Date*</label>
                             <input type="date" class="form-control" id="date"></input>
                         </div>
-                        <div class="form-group col-12 col-sm-6 col-lg-4">
+                        <div class="form-group col-12 col-sm-12 col-lg-4">
                             <label for="job-location" class="font-weight-bold">Job Location</label>
                             <input type="text" class="form-control" id="location" placeholder="Location"></input>
                         </div>

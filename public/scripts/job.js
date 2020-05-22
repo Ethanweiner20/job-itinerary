@@ -2,15 +2,22 @@ class Jobroom {
 	constructor(worker) {
 		this.worker = worker;
 		this.jobs = db.collection('users').doc(user.uid).collection('jobs');
-		this.job = this.jobs.where('worker', '==', worker).orderBy('created_at', 'desc').limit(1);
+		this.job;
 	}
 	async getJob(render) {
 		Spinner.show();
-		const snapshot = await this.job.get();
-		const job = snapshot.docs[0];
-		render(job.data().data);
+		const snapshot = await this.jobs
+			.where('worker', '==', this.worker)
+			.orderBy('created_at', 'desc')
+			.limit(1)
+			.get();
+		this.job = this.jobs.doc(snapshot.docs[0].id);
+		if (render) {
+			const job = await this.job.get();
+			render(job.data().data);
+		}
 		Spinner.hide();
-		return job;
+		return this.job;
 	}
 	async addJob() {
 		Spinner.show();
@@ -24,9 +31,7 @@ class Jobroom {
 	}
 
 	async saveJob(data) {
-		const snapshot = await this.job.get();
-		const job = this.jobs.doc(snapshot.docs[0].id);
-		await job.set({
+		this.job.set({
 			data: data,
 			worker: this.worker,
 			created_at: new Date()
@@ -34,11 +39,17 @@ class Jobroom {
 	}
 	async updateWorker(worker) {
 		this.worker = worker;
-		this.job = this.jobs.where('worker', '==', worker).orderBy('created_at', 'desc').limit(1);
+		this.getJob();
 		return this;
 	}
 	async addWorker(worker) {
 		this.worker = worker;
 		this.addJob();
+	}
+	async deleteWorker() {
+		const snapshot = await this.jobs.where('worker', '==', this.worker).get();
+		snapshot.docs.forEach((doc) => {
+			this.jobs.doc(doc.id).delete();
+		});
 	}
 }

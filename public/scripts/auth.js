@@ -21,8 +21,14 @@ const renderUserUI = async () => {
 	// 	});
 	// });
 	jobRoom = new Jobroom('');
-	const workersSelect = new WorkersSelect();
-	workersSelect.onSnapshot();
+	const select = new WorkersSelect();
+	select.onSnapshot().then(() => {
+		console.log(workersSelect.children[0]);
+		if (workersSelect.children[1]) {
+			console.log(workersSelect.children[1]);
+			workersSelect.children[1].selected = true;
+		}
+	});
 };
 
 const renderNonUserUI = () => {

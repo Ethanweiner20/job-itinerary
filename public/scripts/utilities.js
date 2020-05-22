@@ -10,11 +10,18 @@ const mainContainer = document.querySelector('#main-container');
 const submitButton = document.querySelector('#submit');
 const list = document.querySelector('.list-group');
 const updateButton = document.querySelector('#update');
-const resetButton = document.querySelector('#reset');
+const resetButton = document.querySelector('#reset-form');
 const jobForm = document.querySelector('#job-form');
 const dateInput = document.querySelector('#date');
 const workersSelect = document.querySelector('.workers-select');
 const newWorkerForm = document.querySelector('.new-worker-form');
+const newJobButton = document.querySelector('#new-job-button');
+const deleteWorkerButton = document.querySelector('.delete-worker');
+const deletedWorkerSpan = document.querySelector('#deleted-worker');
+const deleteWorkerForm = document.querySelector('.delete-worker-form');
+const currentWorkerSpan = document.querySelector('.current-worker');
+
+dateInput.valueAsDate = new Date();
 
 Spinner();
 Spinner.hide();

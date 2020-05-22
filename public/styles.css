@@ -10,7 +10,7 @@ nav .border {
   border-width: 5px !important;
 }
 
-.jumbotron h1 {
+.jumbotron h1 h3 {
   font-family: "Righteous", cursive;
 }
 
@@ -87,7 +87,7 @@ textarea {
 }
 
 @media (max-width: 576px) {
-  select {
+  .tools-form select {
     display: none !important;
   }
 }
