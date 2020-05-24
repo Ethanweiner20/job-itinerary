@@ -239,15 +239,11 @@
                         <label for="additional-notes" class="font-weight-bold">Additional Notes</label>
                         <textarea class="form-control" rows=1 name="additionalNotes" placeholder="Notes"></textarea>
                     </div>
-                    <div class="form-group images-videos-form">
-                        <label for="images-videos" class="font-weight-bold">Images & Videos</label>
-                        <div class="image-video-input-group input-group">
-                            <button type="button" class="close mr-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <input type="file" name="input-file" id="input-file" accept="image/*,video/*">
+                    <div class="form-group images-form">
+                        <label for="images" class="font-weight-bold">Images</label>
+                        <div class="images-container">
                         </div>
-                        <div class="image-preview d-block ml-3 mt-1" id="image-preview">
-                            <img src="" alt="No Image Selected" class="img-thumbnail image-preview__image">
-                        </div>
+                        <button type="button" class="mt-2 btn btn-sm images-button d-inline text-white">+ New Image</button>
                     </div>
                     <button id="new-job-button" class="my-2 btn btn-success btn-block">+ New Job</button>
                     <button id="reset-form" class="mb-2 btn btn-warning btn-block">Reset</button>
@@ -263,6 +259,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-storage.js"></script>
     
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -285,6 +282,7 @@
         firebase.analytics();
         const db = firebase.firestore();
         const auth = firebase.auth();
+        const storage = firebase.storage();
     </script>
 
     <!-- Optional JavaScript -->

@@ -108,3 +108,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	top: 0;
 	width: auto;
 }
+
+.image-preview__image,
+.image-notes {
+	@media (min-width: 768px) {
+		max-width: 500px;
+	}
+}
+
+.file-input {
+	font-family: arial;
+}
+
+.images-button {
+	background-color: rgb(103, 38, 156);
+}

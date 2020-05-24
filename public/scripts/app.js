@@ -43,6 +43,7 @@ deleteWorkerButton.addEventListener('click', (e) => {
 deleteWorkerForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	jobRoom.deleteWorker();
+	jobUI.resetForm();
 	$('#delete-worker-modal').modal('hide');
 });
 

@@ -63,3 +63,37 @@ const getDateInput = () => {
 		'T12:00:00Z';
 	return date;
 };
+
+const uploadImage = (path, file) => {
+	const storageRef = storage.ref(path);
+	storageRef.put(file);
+};
+
+// File Inputs
+
+const imagesForm = document.querySelector('.images-form');
+
+imagesForm.addEventListener('change', function(e) {
+	if (e.target.tagName === 'INPUT') {
+		const previewContainer = e.target.parentElement.nextElementSibling;
+		const previewImage = previewContainer.querySelector('.image-preview__image');
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			previewImage.style.display = 'block';
+			const path = user.uid + '/' + file.name;
+			previewContainer.setAttribute('data-id', path);
+			uploadImage(path, file);
+			reader.readAsDataURL(file);
+			reader.addEventListener('load', function() {
+				previewContainer.classList.remove('d-none');
+				previewContainer.classList.add('d-block');
+				previewImage.setAttribute('src', this.result);
+			});
+			e.target.parentElement.parentElement.querySelector('.image-preview').classList.remove('d-none');
+			e.target.parentElement.parentElement.querySelector('.image-notes').classList.remove('d-none');
+			e.target.remove();
+		}
+		jobRoom.saveJob(jobUI.getData());
+	}
+});

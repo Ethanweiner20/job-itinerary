@@ -118,4 +118,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   width: auto;
 }
+
+@media (min-width: 768px) {
+  .image-preview__image,
+  .image-notes {
+    max-width: 500px;
+  }
+}
+
+.file-input {
+  font-family: arial;
+}
+
+.images-button {
+  background-color: #67269c;
+}
 /*# sourceMappingURL=styles.css.map */
