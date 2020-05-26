@@ -84,7 +84,7 @@ imagesForm.addEventListener('change', function(e) {
 		if (file) {
 			const reader = new FileReader();
 			previewImage.style.display = 'block';
-			const path = user.uid + '/' + file.name;
+			const path = user.uid + '/' + Math.floor(Math.random() * 100000) + '_' + file.name;
 			previewContainer.setAttribute('data-id', path);
 			uploadImage(path, file);
 			reader.readAsDataURL(file);
