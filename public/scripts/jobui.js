@@ -117,10 +117,11 @@ class JobUI {
 				this.addTask(task.name, task.completed, task.notes);
 			});
 			formItems.images.forEach((image) => {
-				console.log(image);
-				storage.ref(image.path).getDownloadURL().then((url) => {
-					this.addImage(url, image);
-				});
+				if (image && image.path) {
+					storage.ref(image.path).getDownloadURL().then((url) => {
+						this.addImage(url, image);
+					});
+				}
 			});
 			setTimeout(() => {
 				document.querySelectorAll('textarea').forEach((textarea) => {

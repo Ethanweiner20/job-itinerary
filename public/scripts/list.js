@@ -8,7 +8,7 @@ class List {
 	async update(renderList, value, filter) {
 		this.value = value;
 		this.filter = filter;
-		const response = await this.collectionRef.orderBy('created_at', 'desc').get();
+		const response = await this.collectionRef.orderBy('data.date', 'desc').get();
 		this.docs = response.docs.filter((doc) => {
 			const data = doc.data().data;
 			const workers = doc.data().worker;

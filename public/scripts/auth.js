@@ -107,5 +107,5 @@ signInForm.addEventListener('submit', (e) => {
 signOutButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	auth.signOut();
-	resetForm();
+	jobUI.resetForm();
 });

@@ -71,6 +71,11 @@ newJobButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	jobRoom.addJob();
 	jobUI.resetForm();
+	setTimeout(() => {
+		document.querySelectorAll('textarea').forEach((textarea) => {
+			autoExpand(textarea);
+		});
+	}, 500);
 });
 
 resetButton.addEventListener('click', (e) => {
