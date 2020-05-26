@@ -12,9 +12,13 @@ class JobUI {
 		this.form.querySelector('.tools-form').addEventListener('keydown', (e) => {
 			if (e.target.nodeName === 'INPUT' && e.key === 'Enter') {
 				e.preventDefault();
-				const toolNumber = this.form.querySelectorAll('.tool-input-group').length;
-				this.addTool(toolNumber, '');
-				e.target.parentElement.nextElementSibling.children[1].focus();
+				if (!e.target.parentElement.nextElementSibling) {
+					const toolNumber = this.form.querySelectorAll('.tool-input-group').length;
+					this.addTool(toolNumber, '');
+					this.form.querySelector('.tools-form').lastElementChild.children[1].focus();
+				} else {
+					e.target.parentElement.nextElementSibling.children[1].focus();
+				}
 			}
 		});
 		this.form.querySelector('.tasks-button').addEventListener('click', (e) => {
@@ -83,12 +87,11 @@ class JobUI {
 			}
 		});
 		this.form.querySelector('.images-container').addEventListener('click', function(e) {
-			const length = this.children.length >= 1;
-			console.log(length);
-			if (e.target.tagName.toLowerCase() === 'button' && length) {
+			const hasLength = this.children.length >= 1;
+			if (e.target.tagName.toLowerCase() === 'button' && hasLength) {
 				e.preventDefault();
 				e.target.parentElement.parentElement.remove();
-			} else if (e.target.tagName.toLowerCase() === 'span' && length) {
+			} else if (e.target.tagName.toLowerCase() === 'span' && hasLength) {
 				e.preventDefault();
 				e.target.parentElement.parentElement.parentElement.remove();
 			}

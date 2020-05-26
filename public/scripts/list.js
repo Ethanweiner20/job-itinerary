@@ -13,12 +13,10 @@ class List {
 			const data = doc.data().data;
 			const workers = doc.data().worker;
 			if (data && filter && data[filter] != 'undefined' && value) {
-				console.log(data[filter].length);
 				if (data[filter]) {
 					if (filter === 'date' && data.date) {
 						const inputDate = new Date(value + ' 12:00 PM UTC').toDateString();
 						const dataDate = data.date.toDate().toDateString();
-						console.log(inputDate, dataDate);
 						return inputDate === dataDate;
 					} else if (filter === 'workers' && workers) {
 						return workers.toLowerCase().includes(value) || value.includes(data.workers.toLowerCase());
