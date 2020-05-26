@@ -8,7 +8,6 @@ class List {
 	async update(renderList, value, filter) {
 		this.value = value;
 		this.filter = filter;
-		Spinner.show();
 		const response = await this.collectionRef.orderBy('created_at', 'desc').get();
 		this.docs = response.docs.filter((doc) => {
 			const data = doc.data().data;
@@ -34,7 +33,6 @@ class List {
 			}
 		});
 		renderList(this.docs);
-		Spinner.hide();
 	}
 	async deleteJob(dataId) {
 		Spinner.show();

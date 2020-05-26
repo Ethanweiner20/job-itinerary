@@ -79,17 +79,19 @@ resetButton.addEventListener('click', (e) => {
 });
 
 // Updating the List
-searchForm.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', async (e) => {
 	e.preventDefault();
 	jobForm.classList.add('d-none');
 	listGroup.classList.remove('d-none');
-	list.update(
+	Spinner.show();
+	await list.update(
 		(docs) => {
 			listUI.renderList(docs);
 		},
 		searchForm.search.value.trim().toLowerCase(),
 		searchForm['search-filter'].value.trim().toLowerCase()
 	);
+	Spinner.hide();
 });
 
 listGroup.addEventListener('click', (e) => {
