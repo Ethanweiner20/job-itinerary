@@ -4,17 +4,22 @@ class Jobroom {
 		this.jobs = db.collection('users').doc(user.uid).collection('jobs');
 		this.job;
 	}
-	async getJob(render) {
+	async getJob(render, dataID) {
 		Spinner.show();
-		const snapshot = await this.jobs
-			.where('worker', '==', this.worker)
-			.orderBy('created_at', 'desc')
-			.limit(1)
-			.get();
-		this.job = this.jobs.doc(snapshot.docs[0].id);
+		if (dataID) {
+			this.job = this.jobs.doc(dataID);
+		} else {
+			const snapshot = await this.jobs
+				.where('worker', '==', this.worker)
+				.orderBy('created_at', 'desc')
+				.limit(1)
+				.get();
+			this.job = this.jobs.doc(snapshot.docs[0].id);
+		}
+
 		if (render) {
 			const job = await this.job.get();
-			render(job.data().data);
+			render(job.data());
 		}
 		Spinner.hide();
 		return this.job;

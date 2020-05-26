@@ -8,24 +8,16 @@ const renderUserUI = async () => {
 	jumbotron.classList.add('d-none');
 	mainContainer.classList.remove('d-none');
 
-	// ADD LIST FUNCTIONALITY TO ITS OWN CLASS
-	// db.collection('users').doc(user.uid).collection('days').onSnapshot((snapshot) => {
-	// 	let finished = false;
-	// 	snapshot.docChanges().forEach((change) => {
-	// 		console.log(change.type);
-	// 		if (!finished && (change.type === 'added' || change.type === 'removed')) {
-	// 			const list = new List();
-	// 			list.update('all days');
-	// 			finished = true;
-	// 		}
-	// 	});
-	// });
 	jobRoom = new Jobroom('');
 	const select = new WorkersSelect();
 	select.onSnapshot().then(() => {
 		if (workersSelect.children[1]) {
 			workersSelect.children[1].selected = true;
 		}
+	});
+	list = new List();
+	list.onSnapshot((docs) => {
+		listUI.renderList(docs);
 	});
 };
 

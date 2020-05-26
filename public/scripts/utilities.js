@@ -8,7 +8,7 @@ const signOutButton = document.querySelector('#sign-out-button');
 const jumbotron = document.querySelector('.jumbotron');
 const mainContainer = document.querySelector('#main-container');
 const submitButton = document.querySelector('#submit');
-const list = document.querySelector('.list-group');
+const listGroup = document.querySelector('.list-group');
 const updateButton = document.querySelector('#update');
 const resetButton = document.querySelector('#reset-form');
 const jobForm = document.querySelector('#job-form');
@@ -20,6 +20,9 @@ const deleteWorkerButton = document.querySelector('.delete-worker');
 const deletedWorkerSpan = document.querySelector('#deleted-worker');
 const deleteWorkerForm = document.querySelector('.delete-worker-form');
 const currentWorkerSpan = document.querySelector('.current-worker');
+const searchForm = document.querySelector('#search-form');
+const recentJobHeading = document.querySelector('.recent-job-heading');
+const recentJobInfo = document.querySelector('.recent-job-info');
 
 dateInput.valueAsDate = new Date();
 

@@ -133,4 +133,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .images-button {
   background-color: #67269c;
 }
+
+.images-label {
+  color: #67269c;
+}
 /*# sourceMappingURL=styles.css.map */

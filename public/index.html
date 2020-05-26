@@ -94,7 +94,7 @@
             <div class="col-12 m-auto px-sm-5">
                 <ul class="nav nav-tabs nav-fill nav-justify" id="tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="new-day-tab" data-toggle="tab" href="#new-day" role="tab" aria-controls="new-day"
+                        <a class="nav-link active" id="recent-jobs-tab" data-toggle="tab" href="#recent-jobs" role="tab" aria-controls="recent-jobs"
                             aria-selected="true">Recent Jobs</a>
                     </li>
                     <li class="nav-item">
@@ -105,17 +105,16 @@
                 <div class="tab-content" id="myTabContent">
 
                     <!--New Day Tab-->
-                    <div class="tab-pane fade show mb-3 active" id="new-day" role="tabpanel" aria-labelledby="new-day-tab">
+                    <div class="tab-pane fade show mb-3 active" id="recent-jobs" role="tabpanel" aria-labelledby="recent-jobs-tab">
                         <h2 class="text-dark text-center my-4 font-weight-bold main-font">Recent Jobs </h2>
                         <div class="select-worker p-3 rounded border border-success shadow-lg">
                             <h3 class="text-left">Select a Worker</h3>
-                            <select class="custom-select my-2 workers-select" multiple>
+                            <select class="custom-select my-2 workers-select" size=5>
                                 <option selected class="font-italic" disabled>Select worker or group</option>
                             </select>
 
-                                <button type="button" data-toggle="modal" data-target="#new-worker-modal" class="mr-1 my-1 new-worker btn d-inline text-white bg-success shadow" style="width: 300px;">+ New Worker/Group</button>
-                                <button type="button" data-toggle="modal" data-target="#delete-worker-modal" class="my-1 delete-worker btn btn-danger d-inline text-white shadow" style="width: 300px;">x Delete Selected Worker/Group</button>
-                            </div>
+                            <button type="button" data-toggle="modal" data-target="#new-worker-modal" class="mr-1 my-1 new-worker btn d-inline text-white bg-success shadow" style="width: 300px;">+ New Worker/Group</button>
+                            <button type="button" data-toggle="modal" data-target="#delete-worker-modal" class="my-1 delete-worker btn btn-danger d-inline text-white shadow" style="width: 300px;">x Delete Selected Worker/Group</button>
                         </div>
                         <div class="modal fade" id="new-worker-modal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -164,16 +163,16 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade show" id="archives" role="tabpanel" aria-labelledby="archives-tab">
+                    <div class="tab-pane fade" id="archives" role="tabpanel" aria-labelledby="archives-tab">
                         
                         <form class="mt-4 d-none" id="search-form">
-                            <h2 class="text-dark text-center my-4 font-weight-bold main-font">Search Through Past Days</h2>
+                            <h2 class="text-dark text-center my-4 font-weight-bold main-font">Search Through Past Jobs</h2>
                             <div class="input-group">
                                 <input id="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
                                 <div class="input-group-append">
                                     <select name="search-filter" id="search-filter" class="custom-select mr-1">
                                         <option selected disabled>Search By</option>
-                                        <option value="All Days">All Days</option>
+                                        <option>All Days</option>
                                         <option value="Customer">Customer</option>
                                         <option value="Date">Date</option>
                                         <option value="Location">Location</option>
@@ -183,13 +182,15 @@
                                 <button class="btn btn-outline-success my-2 btn-block" type="submit">Search</button>
                             </div>
                         </form>
-                        <div class="list-group d-none"></div>
+                        <div class="list-group"></div>
                         </form>
                     </div>
 
                 <form class="mt-4 mb-5 px-4 rounded shadow-lg border border-primary d-none" id="job-form">
-                    <p class="mt-2 subtitle text-left font-italic text-info" style="font-size: 15px;">Changes save automatically</p>
-                    <h3 class="text-left">New Job Details for <strong class="current-worker" style="text-decoration: underline;"></strong></h3>
+                    <p class="recent-job-info mt-2 mb-0 text-left text-dark font-weight-bold" style="font-size: 12px;">Most recent job is shown. Click <span class="text-success">New Job</span>
+                         at the bottom to add a new one.</p>
+                    <p class="mt-2 mb-2 text-left font-italic text-info" style="font-size: 15px;">Changes save automatically</p>
+                    <h3 class="recent-job-heading text-left">Job for <strong class="current-worker" style="text-decoration: underline;"></strong></h3>
                     <hr>
                     <!--Main Inputs-->
                     <div class="form-row">
@@ -240,13 +241,13 @@
                         <textarea class="form-control" rows=1 name="additionalNotes" placeholder="Notes"></textarea>
                     </div>
                     <div class="form-group images-form">
-                        <label for="images" class="font-weight-bold">Images</label>
+                        <label for="images" class="images-label font-weight-bold">Images</label>
                         <div class="images-container">
                         </div>
                         <button type="button" class="mt-2 btn btn-sm images-button d-inline text-white">+ New Image</button>
                     </div>
                     <button id="new-job-button" class="my-2 btn btn-success btn-block">+ New Job</button>
-                    <button id="reset-form" class="mb-2 btn btn-warning btn-block">Reset</button>
+                    <button id="reset-form" class="mb-2 btn btn-danger btn-block">Reset</button>
                 </form>
             </div>
         </div>
@@ -287,11 +288,14 @@
 
     <!-- Optional JavaScript -->
     <script src="scripts/utilities.js"></script>
+    <script src="scripts/list.js"></script>
+    <script src="scripts/listui.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/workersSelect.js"></script>
     <script src="scripts/job.js"></script>
     <script src="scripts/jobui.js"></script>
     <script src="scripts/app.js"></script>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

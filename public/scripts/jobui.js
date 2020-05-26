@@ -96,9 +96,10 @@ class JobUI {
 	}
 	fillForm(data) {
 		this.form.classList.remove('d-none');
+		const formItems = data.data;
 		this.resetForm();
-		if (data) {
-			const { customer, date, location, startTime, hours, additionalNotes } = data;
+		if (formItems) {
+			const { customer, date, location, startTime, hours, additionalNotes } = formItems;
 			this.form.customer.value = customer;
 			this.form.date.valueAsDate = date.toDate();
 			this.form.location.value = location;
@@ -107,15 +108,16 @@ class JobUI {
 			this.form.additionalNotes.value = additionalNotes;
 			this.form.querySelector('.tools-form').innerHTML =
 				'<label for="tools" class="font-weight-bold">Tools</label>';
-			data.tools.forEach((tool, index) => {
+			formItems.tools.forEach((tool, index) => {
 				this.addTool(index, tool.name, tool.outToJob, tool.backToShop);
 			});
 			this.form.querySelector('.tasks-form').innerHTML =
 				'<label for="tasks" class="font-weight-bold">Tasks</label>';
-			data.tasks.forEach((task) => {
+			formItems.tasks.forEach((task) => {
 				this.addTask(task.name, task.completed, task.notes);
 			});
-			data.images.forEach((image) => {
+			formItems.images.forEach((image) => {
+				console.log(image);
 				storage.ref(image.path).getDownloadURL().then((url) => {
 					this.addImage(url, image);
 				});
@@ -126,6 +128,7 @@ class JobUI {
 				});
 			}, 500);
 		}
+		currentWorkerSpan.innerText = data.worker;
 	}
 	getData() {
 		const { customer, location, time, hours, additionalNotes } = this.form;
