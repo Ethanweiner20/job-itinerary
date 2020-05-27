@@ -11,18 +11,19 @@ class List {
 		const response = await this.collectionRef.orderBy('data.date', 'desc').get();
 		this.docs = response.docs.filter((doc) => {
 			const data = doc.data().data;
-			const workers = doc.data().worker;
+			const worker = doc.data().worker;
 			if (data && filter && data[filter] != 'undefined' && value) {
 				if (data[filter]) {
 					if (filter === 'date' && data.date) {
 						const inputDate = new Date(value + ' 12:00 PM UTC').toDateString();
 						const dataDate = data.date.toDate().toDateString();
 						return inputDate === dataDate;
-					} else if (filter === 'workers' && workers) {
-						return workers.toLowerCase().includes(value) || value.includes(data.workers.toLowerCase());
 					} else {
 						return data[filter].toLowerCase().includes(value) || value.includes(data[filter].toLowerCase());
 					}
+				} else if (filter === 'workers' && worker) {
+					console.log('workers');
+					return worker.toLowerCase().includes(value) || value.includes(worker.toLowerCase());
 				} else {
 					return false;
 				}
