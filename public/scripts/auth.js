@@ -9,7 +9,7 @@ const renderUserUI = async () => {
 	mainContainer.classList.remove('d-none');
 
 	jobRoom = new Jobroom('');
-	const select = new WorkersSelect();
+	select = new WorkersSelect();
 	select.onSnapshot().then(() => {
 		if (workersSelect.children[1]) {
 			workersSelect.children[1].selected = true;

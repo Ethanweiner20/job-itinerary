@@ -12,8 +12,8 @@ class WorkersSelect {
 			</option>
 		`;
 	}
-	deleteWorker(name) {
-		const workerOption = this.select.querySelector(`option[value="${name}"]`);
+	deleteWorker() {
+		const workerOption = this.select.querySelector(`option[value="${this.select.value}"]`);
 		if (workerOption) {
 			workerOption.remove();
 		}
@@ -28,8 +28,6 @@ class WorkersSelect {
 						this.workers.push(change.doc.data().worker);
 						this.showWorker(worker);
 					}
-				} else if (change.type === 'removed') {
-					this.deleteWorker(worker);
 				}
 			});
 		});

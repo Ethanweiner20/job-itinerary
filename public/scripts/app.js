@@ -2,6 +2,7 @@ let jobRoom;
 const jobUI = new JobUI(jobForm);
 let list;
 const listUI = new ListUI(listGroup);
+let select;
 
 deleteWorkerButton.disabled = true;
 
@@ -53,17 +54,18 @@ deleteWorkerButton.addEventListener('click', (e) => {
 deleteWorkerForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 	jobRoom.deleteWorker();
+	select.deleteWorker();
 	jobUI.resetForm();
 	$('#delete-worker-modal').modal('hide');
 	setTimeout(selectFirstWorker, 500);
 });
 
 // Saving Data
-jobUI.form.addEventListener('keyup', () => {
+jobUI.form.querySelector('.main-inputs').addEventListener('keyup', () => {
 	jobRoom.saveJob(jobUI.getData());
 });
 
-jobUI.form.addEventListener('click', () => {
+jobUI.form.querySelector('.main-inputs').addEventListener('click', () => {
 	jobRoom.saveJob(jobUI.getData());
 });
 
@@ -81,6 +83,19 @@ newJobButton.addEventListener('click', (e) => {
 resetButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	jobUI.resetForm();
+});
+
+deleteJobButton.addEventListener('click', (e) => {
+	e.preventDefault();
+	jobRoom
+		.deleteJob(() => {
+			jobUI.resetForm();
+		})
+		.then(() => {
+			jobRoom.getJob((data) => {
+				jobUI.fillForm(data);
+			});
+		});
 });
 
 // Updating the List

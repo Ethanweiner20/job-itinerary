@@ -42,6 +42,18 @@ class Jobroom {
 			created_at: new Date()
 		});
 	}
+	async deleteJob(resetForm) {
+		Spinner.show();
+		console.log(this.job);
+		await this.job.delete();
+		this.job = null;
+		resetForm();
+		await this.getJob((data) => {
+			console.log(this.job);
+			jobUI.fillForm(data);
+		});
+		Spinner.hide();
+	}
 	async updateWorker(worker) {
 		this.worker = worker;
 		this.getJob();

@@ -23,6 +23,7 @@ const currentWorkerSpan = document.querySelector('.current-worker');
 const searchForm = document.querySelector('#search-form');
 const recentJobHeading = document.querySelector('.recent-job-heading');
 const recentJobInfo = document.querySelector('.recent-job-info');
+const deleteJobButton = document.querySelector('#delete-job');
 
 dateInput.valueAsDate = new Date();
 

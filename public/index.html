@@ -188,67 +188,74 @@
 
                 <form class="mt-4 mb-5 px-4 rounded shadow-lg border border-primary d-none" id="job-form">
                     <p class="recent-job-info mt-2 mb-0 text-left text-dark font-weight-bold" style="font-size: 12px;">Most recent job is shown. Click <span class="text-success">New Job</span>
-                         at the bottom to add a new one.</p>
+                         to add a new one.</p>
                     <p class="mt-2 mb-2 text-left font-italic text-info" style="font-size: 15px;">Changes save automatically</p>
-                    <h3 class="recent-job-heading text-left">Job for <strong class="current-worker" style="text-decoration: underline;"></strong></h3>
+                    <h3 class="recent-job-heading text-left d-inline">Job for <strong class="current-worker" style="text-decoration: underline;"></strong></h3>
+                    <button id="new-job-button" class="mx-3 btn btn-success d-inline">+ Start a New Job</button>
+
                     <hr>
                     <!--Main Inputs-->
-                    <div class="form-row">
-                        <div class="form-group col-12 col-sm-6 col-lg-6">
-                            <label for="customer" class="font-weight-bold">Customer*</label>
-                            <input type="text" id="customer" class="form-control" placeholder="Customer"></input>
+                    <div class="main-inputs">
+                        <div class="form-row">
+                            <div class="form-group col-12 col-sm-6 col-lg-6">
+                                <label for="customer" class="font-weight-bold">Customer*</label>
+                                <input type="text" id="customer" class="form-control" placeholder="Customer"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-6">
+                                <label for="date" class="font-weight-bold">Date*</label>
+                                <input type="date" class="form-control" id="date"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-12 col-lg-4">
+                                <label for="job-location" class="font-weight-bold">Job Location</label>
+                                <input type="text" class="form-control" id="location" placeholder="Location"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="hours" class="font-weight-bold">Start Time</label>
+                                <input type="text" class="form-control" id="time" placeholder="Start Time"></input>
+                            </div>
+                            <div class="form-group col-12 col-sm-6 col-lg-4">
+                                <label for="hours" class="font-weight-bold">Hours*</label>
+                                <input type="text" class="form-control" id="hours" placeholder="Total Hours & On Site Hours"></input>
+                            </div>
                         </div>
-                        <div class="form-group col-12 col-sm-6 col-lg-6">
-                            <label for="date" class="font-weight-bold">Date*</label>
-                            <input type="date" class="form-control" id="date"></input>
+                        
+                        <!--Tools Input-->
+                        <div class="form-group tools-form">
+                            <label for="tools" class="font-weight-bold">Tools</label>
                         </div>
-                        <div class="form-group col-12 col-sm-12 col-lg-4">
-                            <label for="job-location" class="font-weight-bold">Job Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="Location"></input>
+                        
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-sm tools-button d-inline text-white">+ New Tool</button>
+                            <p class="text-muted font-italic d-inline ml-2">or press enter</p>
                         </div>
-                        <div class="form-group col-12 col-sm-6 col-lg-4">
-                            <label for="hours" class="font-weight-bold">Start Time</label>
-                            <input type="text" class="form-control" id="time" placeholder="Start Time"></input>
+                        
+                        <!--Tasks Input-->
+                        <div class="form-group tasks-form">
+                            <label for="tasks" class="font-weight-bold">Tasks</label>
                         </div>
-                        <div class="form-group col-12 col-sm-6 col-lg-4">
-                            <label for="hours" class="font-weight-bold">Hours*</label>
-                            <input type="text" class="form-control" id="hours" placeholder="Total Hours & On Site Hours"></input>
+                        
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-sm tasks-button d-inline text-white">+ New Task</button>
+                            <p class="text-muted font-italic d-inline ml-2">or press enter</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additional-notes" class="font-weight-bold">Additional Notes</label>
+                            <textarea class="form-control" rows=1 name="additionalNotes" placeholder="Notes"></textarea>
+                        </div>
+                        <div class="form-group images-form">
+                            <label for="images" class="images-label font-weight-bold">Images</label>
+                            <div class="images-container">
+                            </div>
+                            <button type="button" class="mt-2 btn btn-sm images-button d-inline text-white">+ New Image</button>
                         </div>
                     </div>
                     
-                    <!--Tools Input-->
-                    <div class="form-group tools-form">
-                        <label for="tools" class="font-weight-bold">Tools</label>
-                    </div>
-                
-                    <div class="mb-3">
-                        <button type="button" class="btn btn-sm tools-button d-inline text-white">+ New Tool</button>
-                        <p class="text-muted font-italic d-inline ml-2">or press enter</p>
-                    </div>
-                
-                    <!--Tasks Input-->
-                    <div class="form-group tasks-form">
-                        <label for="tasks" class="font-weight-bold">Tasks</label>
-                    </div>
-                
-                    <div class="mb-3">
-                        <button type="button" class="btn btn-sm tasks-button d-inline text-white">+ New Task</button>
-                        <p class="text-muted font-italic d-inline ml-2">or press enter</p>
-                    </div>
-                
-                    <div class="form-group">
-                        <label for="additional-notes" class="font-weight-bold">Additional Notes</label>
-                        <textarea class="form-control" rows=1 name="additionalNotes" placeholder="Notes"></textarea>
-                    </div>
-                    <div class="form-group images-form">
-                        <label for="images" class="images-label font-weight-bold">Images</label>
-                        <div class="images-container">
-                        </div>
-                        <button type="button" class="mt-2 btn btn-sm images-button d-inline text-white">+ New Image</button>
-                    </div>
-                    <button id="new-job-button" class="my-2 btn btn-success btn-block">+ New Job</button>
-                    <button id="reset-form" class="mb-2 btn btn-danger btn-block">Reset</button>
+                    <button id="reset-form" class="mb-2 btn btn-warning btn-block">Reset</button>
+                    <button id="delete-job" class="mb-2 btn btn-danger btn-block">Delete Job</button>
+
                 </form>
+
             </div>
         </div>
         
