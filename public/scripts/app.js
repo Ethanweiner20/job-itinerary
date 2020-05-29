@@ -24,6 +24,8 @@ const selectFirstWorker = () => {
 	}
 };
 
+setTimeout(selectFirstWorker, 1200);
+
 // Selecting Worker
 workersSelect.addEventListener('change', async (e) => {
 	if (e.target.classList.contains('workers-select')) {
@@ -31,8 +33,6 @@ workersSelect.addEventListener('change', async (e) => {
 	}
 	deleteWorkerButton.disabled = false;
 });
-
-setTimeout(selectFirstWorker, 1200);
 
 // Adding Worker
 newWorkerForm.addEventListener('submit', async (e) => {

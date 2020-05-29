@@ -11,9 +11,7 @@ const renderUserUI = async () => {
 	jobRoom = new Jobroom('');
 	select = new WorkersSelect();
 	select.onSnapshot().then(() => {
-		if (workersSelect.children[1]) {
-			workersSelect.children[1].selected = true;
-		}
+		setTimeout(selectFirstWorker, 500);
 	});
 	list = new List();
 	list.onSnapshot((docs) => {
@@ -108,4 +106,5 @@ signOutButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	auth.signOut();
 	jobUI.resetForm();
+	workersSelect.innerHTML = '<option selected="" class="font-italic" disabled="">Select worker or group</option>';
 });
