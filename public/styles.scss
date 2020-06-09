@@ -66,7 +66,7 @@ textarea {
 			border: 2px solid darken($tasks-color, 3);
 		}
 	}
-	input {
+	textarea {
 		margin-bottom: -1px !important;
 	}
 }
@@ -126,4 +126,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .images-label {
 	color: rgb(103, 38, 156);
+}
+
+.alert-success {
+	transition: 1.0s opacity ease !important;
 }

@@ -27,9 +27,20 @@ class WorkersSelect {
 					if (!this.workers.includes(change.doc.data().worker)) {
 						this.workers.push(change.doc.data().worker);
 						this.showWorker(worker);
+						this.selectFirstWorker();
 					}
 				}
 			});
 		});
+	}
+
+	selectFirstWorker() {
+		if (this.select.children[1]) {
+			this.select.children[0].selected = false;
+			this.select.children[1].selected = true;
+			this.select.dispatchEvent(new Event('change'));
+		} else {
+			jobForm.classList.add('d-none');
+		}
 	}
 }

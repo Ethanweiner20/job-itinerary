@@ -10,7 +10,7 @@ class JobUI {
 			this.form.querySelector('.tools-form').lastElementChild.children[1].focus();
 		});
 		this.form.querySelector('.tools-form').addEventListener('keydown', (e) => {
-			if (e.target.nodeName === 'INPUT' && e.key === 'Enter') {
+			if (e.target.nodeName === 'INPUT' && e.key === 'Tab') {
 				e.preventDefault();
 				if (!e.target.parentElement.nextElementSibling) {
 					const toolNumber = this.form.querySelectorAll('.tool-input-group').length;
@@ -27,9 +27,9 @@ class JobUI {
 			this.form.querySelector('.tasks-form').lastElementChild.firstElementChild.lastElementChild.focus();
 		});
 		this.form.querySelector('.tasks-form').addEventListener('keydown', (e) => {
-			if (e.key === 'Enter') {
+			if (e.key === 'Tab') {
 				e.preventDefault();
-				if (e.target.tagName.toLowerCase() === 'textarea') {
+				if (e.target.name === 'notes') {
 					if (!e.target.parentElement.nextElementSibling) {
 						this.addTask('', false, '');
 						if (e.target.name === 'notes') {
@@ -126,11 +126,7 @@ class JobUI {
 					});
 				}
 			});
-			setTimeout(() => {
-				document.querySelectorAll('textarea').forEach((textarea) => {
-					autoExpand(textarea);
-				});
-			}, 500);
+			expandTextAreas();
 		}
 		currentWorkerSpan.innerText = data.worker;
 	}
@@ -164,7 +160,7 @@ class JobUI {
 			case 'task':
 				this.form.querySelectorAll(`.${type}-input-group`).forEach((item) => {
 					items.push({
-						name: item.querySelector('input[type="text"]').value,
+						name: item.querySelector('#task').value,
 						completed: item.querySelector('.completed').checked,
 						notes: item.nextElementSibling.value
 					});
@@ -272,7 +268,7 @@ class JobUI {
                             <input class="completed" type="checkbox" aria-label="Checkbox for following text input">
                         </div>
                     </div>
-                <input value="${name}" type="text" id="task" class="form-control" placeholder="Task">
+                <textarea id="task" rows=1 class="form-control" placeholder="Task">${name}</textarea>
             </div>
             <textarea class="task-notes form-control ml-3 font-italic" rows=1 name="notes" placeholder="Notes">${notes}</textarea>
 

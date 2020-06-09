@@ -10,9 +10,7 @@ const renderUserUI = async () => {
 
 	jobRoom = new Jobroom('');
 	select = new WorkersSelect();
-	select.onSnapshot().then(() => {
-		setTimeout(selectFirstWorker, 500);
-	});
+	select.onSnapshot();
 	list = new List();
 	list.onSnapshot((docs) => {
 		listUI.renderList(docs);

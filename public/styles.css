@@ -74,7 +74,7 @@ textarea {
   border: 2px solid #005c50;
 }
 
-.tasks-form input {
+.tasks-form textarea {
   margin-bottom: -1px !important;
 }
 
@@ -136,5 +136,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .images-label {
   color: #67269c;
+}
+
+.alert-success {
+  -webkit-transition: 1.0s opacity ease !important;
+  transition: 1.0s opacity ease !important;
 }
 /*# sourceMappingURL=styles.css.map */

@@ -6,26 +6,6 @@ let select;
 
 deleteWorkerButton.disabled = true;
 
-const refreshForm = (worker) => {
-	jobRoom.updateWorker(worker);
-	jobRoom.getJob((data) => {
-		jobUI.fillForm(data);
-	});
-	currentWorkerSpan.innerText = worker;
-};
-
-const selectFirstWorker = () => {
-	if (workersSelect.children[1]) {
-		workersSelect.children[0].selected = false;
-		workersSelect.children[1].selected = true;
-		workersSelect.dispatchEvent(new Event('change'));
-	} else {
-		jobForm.classList.add('d-none');
-	}
-};
-
-setTimeout(selectFirstWorker, 1200);
-
 // Selecting Worker
 workersSelect.addEventListener('change', async (e) => {
 	if (e.target.classList.contains('workers-select')) {
@@ -57,7 +37,6 @@ deleteWorkerForm.addEventListener('submit', (e) => {
 	select.deleteWorker();
 	jobUI.resetForm();
 	$('#delete-worker-modal').modal('hide');
-	setTimeout(selectFirstWorker, 500);
 });
 
 // Saving Data
@@ -72,21 +51,26 @@ jobUI.form.querySelector('.main-inputs').addEventListener('click', () => {
 newJobButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	jobRoom.addJob();
-	jobUI.resetForm();
+	newJobAlert.style.display = 'block';
+	newJobAlert.style.opacity = '1';
+
 	setTimeout(() => {
-		document.querySelectorAll('textarea').forEach((textarea) => {
-			autoExpand(textarea);
-		});
-	}, 500);
+		newJobAlert.style.display = 'none';
+		newJobAlert.style.opacity = '0';
+	}, 3000);
+	jobUI.resetForm();
 });
 
 resetButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	jobUI.resetForm();
+	$('#reset-job-modal').modal('hide');
 });
 
 deleteJobButton.addEventListener('click', (e) => {
 	e.preventDefault();
+	$('#delete-job-modal').modal('hide');
+
 	jobRoom
 		.deleteJob(() => {
 			jobUI.resetForm();

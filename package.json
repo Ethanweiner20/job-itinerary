@@ -1,0 +1,25 @@
+{
+  "name": "itinerary",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.1",
+    "@babel/preset-env": "^7.10.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ethanweiner20/job-itinerary.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ethanweiner20/job-itinerary/issues"
+  },
+  "homepage": "https://github.com/Ethanweiner20/job-itinerary#readme",
+  "description": ""
+}

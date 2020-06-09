@@ -24,6 +24,7 @@ const searchForm = document.querySelector('#search-form');
 const recentJobHeading = document.querySelector('.recent-job-heading');
 const recentJobInfo = document.querySelector('.recent-job-info');
 const deleteJobButton = document.querySelector('#delete-job');
+const newJobAlert = document.querySelector('.alert-success');
 
 dateInput.valueAsDate = new Date();
 
@@ -46,6 +47,12 @@ var autoExpand = function(field) {
 		parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 
 	field.style.height = height + 'px';
+};
+
+const expandTextAreas = () => {
+	document.querySelectorAll('textarea').forEach((textarea) => {
+		autoExpand(textarea);
+	});
 };
 
 document.addEventListener(
@@ -71,6 +78,14 @@ const getDateInput = () => {
 const uploadImage = (path, file) => {
 	const storageRef = storage.ref(path);
 	storageRef.put(file);
+};
+
+const refreshForm = (worker) => {
+	jobRoom.updateWorker(worker);
+	jobRoom.getJob((data) => {
+		jobUI.fillForm(data);
+	});
+	currentWorkerSpan.innerText = worker;
 };
 
 // File Inputs

@@ -36,10 +36,9 @@ class Jobroom {
 	}
 
 	async saveJob(data) {
-		this.job.set({
+		this.job.update({
 			data: data,
-			worker: this.worker,
-			created_at: new Date()
+			worker: this.worker
 		});
 	}
 	async deleteJob(resetForm) {
