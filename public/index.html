@@ -16,6 +16,8 @@
     <!--CSS-->
     <link rel="stylesheet" href="styles.css" type="text/css">
     <link rel="icon" href="pitch-fork.png"></link>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
     <title>Job Itinerary</title>
 </head>
 
@@ -192,7 +194,7 @@
                     <p class="mt-2 mb-2 text-left font-italic text-info" style="font-size: 15px;">Changes save automatically</p>
                     <h3 class="recent-job-heading text-left d-inline">Job for <strong class="current-worker" style="text-decoration: underline;"></strong></h3>
                     <button id="new-job-button" class="mx-sm-3 mt-2 mt-sm-0 btn btn-success d-inline shadow" style="border: 3px solid rgb(109, 216, 114) !important;">+ Start a New Job</button>
-                    <div class="alert alert-success mt-2" style="display: none;" role="alert">
+                    <div class="alert alert-success mt-2 fade show" style="display: none;" role="alert">
                         New Job Started!
                     </div>
 
@@ -254,6 +256,12 @@
                         </div>
                     </div>
                     
+                    <!--<div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="recipient@gmail.com">
+                        <div class="input-group-append">
+                            <button class="send-email btn btn-success">Send email w/ the Above Job</button>
+                        </div>
+                    </div>-->
                     <button type="button" data-toggle="modal" data-target="#reset-job-modal"class="mb-2 btn btn-warning btn-block text-white">Reset</button>
                     <button type="button" data-toggle="modal" data-target="#delete-job-modal"
                         class="mb-2 btn btn-danger btn-block text-white">Delete Job</button>
@@ -346,6 +354,7 @@
     <script src="scripts/job.js"></script>
     <script src="scripts/jobui.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/email.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

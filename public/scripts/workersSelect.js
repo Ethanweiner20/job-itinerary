@@ -27,20 +27,19 @@ class WorkersSelect {
 					if (!this.workers.includes(change.doc.data().worker)) {
 						this.workers.push(change.doc.data().worker);
 						this.showWorker(worker);
-						this.selectFirstWorker();
 					}
 				}
 			});
+			this.selectWorker();
 		});
 	}
 
-	selectFirstWorker() {
-		if (this.select.children[1]) {
+	selectWorker() {
+		const worker = localStorage.getItem('worker') ? localStorage.getItem('worker') : null;
+		if (worker) {
 			this.select.children[0].selected = false;
-			this.select.children[1].selected = true;
+			this.select.querySelector(`option[value="${worker}"]`).selected = true;
 			this.select.dispatchEvent(new Event('change'));
-		} else {
-			jobForm.classList.add('d-none');
 		}
 	}
 }

@@ -75,9 +75,20 @@ const getDateInput = () => {
 	return date;
 };
 
-const uploadImage = (path, file) => {
+const uploadImage = async (path, file) => {
 	const storageRef = storage.ref(path);
-	storageRef.put(file);
+	const task = storageRef.put(file);
+	Spinner.show();
+	task.on(
+		'state_changed',
+		function progress(snapshot) {},
+		function error(err) {
+			console.log(err);
+		},
+		function complete() {
+			Spinner.hide();
+		}
+	);
 };
 
 const refreshForm = (worker) => {
@@ -93,6 +104,7 @@ const refreshForm = (worker) => {
 const imagesForm = document.querySelector('.images-form');
 
 imagesForm.addEventListener('change', function(e) {
+	console.log('change');
 	if (e.target.tagName === 'INPUT') {
 		const previewContainer = e.target.parentElement.nextElementSibling;
 		const previewImage = previewContainer.querySelector('.image-preview__image');

@@ -10,6 +10,9 @@ deleteWorkerButton.disabled = true;
 workersSelect.addEventListener('change', async (e) => {
 	if (e.target.classList.contains('workers-select')) {
 		refreshForm(e.target.value);
+		if (!workersSelect.children[0].selected) {
+			localStorage.setItem('worker', e.target.value);
+		}
 	}
 	deleteWorkerButton.disabled = false;
 });
@@ -52,11 +55,9 @@ newJobButton.addEventListener('click', (e) => {
 	e.preventDefault();
 	jobRoom.addJob();
 	newJobAlert.style.display = 'block';
-	newJobAlert.style.opacity = '1';
 
 	setTimeout(() => {
-		newJobAlert.style.display = 'none';
-		newJobAlert.style.opacity = '0';
+		$('.alert-success').alert('close');
 	}, 3000);
 	jobUI.resetForm();
 });
