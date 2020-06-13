@@ -121,10 +121,8 @@ class JobUI {
 			});
 			formItems.images.forEach((image) => {
 				if (image && image.path) {
-					Spinner.show();
 					storage.ref(image.path).getDownloadURL().then((url) => {
 						this.addImage(url, image);
-						Spinner.hide();
 					});
 				}
 			});
