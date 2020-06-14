@@ -5,6 +5,7 @@ class Jobroom {
 		this.job;
 	}
 	async getJob(render, dataID) {
+		console.log('getJob');
 		Spinner.show();
 		if (dataID) {
 			this.job = this.jobs.doc(dataID);
