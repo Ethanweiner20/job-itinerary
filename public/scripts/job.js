@@ -11,7 +11,7 @@ class Jobroom {
 		} else {
 			const snapshot = await this.jobs
 				.where('worker', '==', this.worker)
-				.orderBy('created_at', 'desc')
+				.orderBy('data.date', 'desc')
 				.limit(1)
 				.get();
 			this.job = this.jobs.doc(snapshot.docs[0].id);
