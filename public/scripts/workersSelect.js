@@ -36,7 +36,7 @@ class WorkersSelect {
 
 	selectWorker() {
 		const worker = localStorage.getItem('worker') ? localStorage.getItem('worker') : null;
-		if (worker) {
+		if (worker && this.select.children[0].selected === true) {
 			this.select.children[0].selected = false;
 			this.select.querySelector(`option[value="${worker}"]`).selected = true;
 			this.select.dispatchEvent(new Event('change'));
