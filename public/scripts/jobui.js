@@ -123,11 +123,12 @@ class JobUI {
 				if (image && image.path) {
 					storage.ref(image.path).getDownloadURL().then((url) => {
 						this.addImage(url, image);
+						expandTextAreas();
 					});
 				}
 			});
-			expandTextAreas();
 		}
+		expandTextAreas();
 		currentWorkerSpan.innerText = data.worker;
 	}
 	getData() {
